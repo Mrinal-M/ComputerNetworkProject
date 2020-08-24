@@ -73,7 +73,6 @@ def clienthandler():
             
 #setting up the server
 
-n=20
 def broadcast(message):
     '''A message is braodcasted to each client in the clientlist'''
     for client in clientlist:
