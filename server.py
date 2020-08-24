@@ -14,8 +14,8 @@ qnlist=["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12","q13","q1
 
 clientlist= []
 portlist=[]
-bz=[0]
-no=[0]
+bz=0
+no=0
 
 
 random.shuffle(qnlist)
@@ -38,20 +38,20 @@ def clienthandler():
     count=0#keeps track of the score
     print("Got a connection from {}:{}".format(addr[0],addr[1]))
     while count<5:
-        if(len(clientlist)==3 and bz[0]==0) :
+        if(len(clientlist)==3 and bz==0) :
             broadcast(qnlist[no[0]])
-            no[0]=no[0]+1
+            no=no+1
         data=client.recv(1024)
-        if(data[0:2]=="bz" and bz[0]!=1 ):
-            bz[0]=1
+        if(data[0:2]=="bz" and bz!=1 ):
+            bz=1
             ans=client.recv(1024)
-            #print qnlist[no[0]-1]
-            #print (qndict[qnlist[no[0]-1]])
-            if (len(qndict[qnlist[no[0]-1]])==2 and ans[0:2]==qndict[qnlist[no[0]-1]]) or (len(qndict[qnlist[no[0]-1]])==1 and ans[0:1]==qndict[qnlist[no[0]-1]]):
+            #print qnlist[no-1]
+            #print (qndict[qnlist[no-1]])
+            if (len(qndict[qnlist[no-1]])==2 and ans[0:2]==qndict[qnlist[no-1]]) or (len(qndict[qnlist[no-1]])==1 and ans[0:1]==qndict[qnlist[no-1]]):
                 count=count+1
                 print ("score of {},{},is {}".format(addr[0],addr[1],count))
                 #qnlist.remove(qnlist[no])
-                bz[0]=0
+                bz=0
                 if count==5:
                     print ("game won by {}:{}".format(addr[0],addr[1]))
                     for client in clientlist:
@@ -59,7 +59,7 @@ def clienthandler():
                         break
             else:
                 print ("Wrong Answer")
-                bz[0]=0
+                bz=0
         elif(data=="disconnect"):
             client.send("Goodbyeeeee")
             client.close()
