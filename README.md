@@ -7,3 +7,12 @@ This process is repeated till one of the player wins.
 This game contains two programs- server.py and client.py
 server.py handles the host side of the game. It takes care of all the things that needs to be done during the game.
 client.py handles the participant side of the game. It takes care of pressing buzzer and replying.
+
+How to play the game:
+First the host should run server.py
+##python server.py
+The IP address and port no of host must be shared with the clients lets call it IP, PORT.
+Now the clients must run the client.py
+##python client.py IP PORT
+
+
