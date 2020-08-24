@@ -31,6 +31,7 @@ def clienthandler():
     The functions takes care of the condition and allows the player who first pressed the buzzer to answer.
     If the answer is right, the score gets incremented and if the score is 5 the player is declared the winner and the game is OVER!!!
     If the player provides a wrong answer then the next question is broadcasted'''
+    global no,bz
     client,addr=server.accept()
     #server.accept() returns a new socket and address of client. Address is a tuple (ip,port)
     clientlist.append(client)
@@ -39,7 +40,7 @@ def clienthandler():
     print("Got a connection from {}:{}".format(addr[0],addr[1]))
     while count<5:
         if(len(clientlist)==3 and bz==0) :
-            broadcast(qnlist[no[0]])
+            broadcast(qnlist[no])
             no=no+1
         data=client.recv(1024)
         if(data[0:2]=="bz" and bz!=1 ):
